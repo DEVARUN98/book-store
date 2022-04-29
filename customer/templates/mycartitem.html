@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{%extends 'base.html'%}
+{%block body_block%}
+{%for book in items%}
+<div class="row">
+    <div class="col-12">
+        <div class="card" style="width: 15rem;">
+            <img src="{{book.item.image.url}}" class="card-img-top w-100 h-25" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{book.item.book_name}}</h5>
+                <h5 class="card-title">{{book.status}}</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's
+                    content.</p>
+                <a href="{%url 'removeitem' book.id%}" class="btn btn-danger">Remove Item</a></li>
+                <a href="{%url 'ordercreate' book.id%}" class="btn btn-success">Buy Now</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-9">
+        <div class="card" style="width: 18rem;">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{cart.item.book_name}}</li>
+                <li class="list-group-item">{{book.item.price}}</li>
+                <li class="list-group-item">{{book.status}}</li>
+                <li>
+            </ul>
+        </div>
+    </div>
+</div>
+{%endfor%}
+{%endblock%}
+
+</html>

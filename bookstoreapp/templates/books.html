@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{%static 'css/book_style.css'%}">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form action="" method="GET">
+                {%csrf_token%}
+                {{filter.form.as_p}}
+                <a href="" class="btn btn-success">Search</a>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <table class="table">
+                <tr>
+                    <th>Book_name</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                    <th>Copies</th>
+                    <th>Image</th>
+                </tr>
+                {%for book in filters%}
+                <tr>
+                    <td>{{book.book_name}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.price}}</td>
+                    <td>{{book.copies}}</td>
+                    <td><img src="{{book.image.url}}" alt="" width="100px" height="100px"></td>
+                    <td>
+                        <a href="{%url 'editbook' book.id%}" class="btn btn-warning">Edit</a>
+                        <a href="{%url 'removebook' book.id%}" class="btn btn-danger">Delete</a>
+                        <a href="{%url 'viewbook' book.id%}" class="btn btn-success">View</a>
+                    </td>
+                </tr>
+                {%endfor%}
+            </table>
+        </div>
+        <div class="col-1"></div>
+    </div>
+
+</div>
+</body>
+</html>
